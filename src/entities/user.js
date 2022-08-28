@@ -1,5 +1,4 @@
-import { randomUUID } from "node: crypto";
-import { CharacterEntity } from "../entities/character.js";
+import { randomUUID } from "crypto";
 
 export class UserEntity {
   constructor(user) {
@@ -8,18 +7,12 @@ export class UserEntity {
     this.email = user.email;
     this.password = user.password;
     this.image = user.image;
-    this.character = user.character ?? [];
   }
 
   validate() {
     if (!this.name || !this.email || !this.password || !this.image) {
       throw new Error("Invalid user");
     }
-  }
-
-  addCharacter(character) {
-    const newCharacter = new CharacterEntity(character, this.id);
-    this.character.push(newCharacter.getCharacter());
   }
 
   getUser() {
@@ -29,7 +22,6 @@ export class UserEntity {
       email: this.email,
       password: this.password,
       image: this.image,
-      character: this.character,
     };
 
     return user;
