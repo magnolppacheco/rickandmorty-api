@@ -1,14 +1,13 @@
 import { UserEntity } from "../../entities/user";
 
-export class CreateUser{
-    constructor (userRepository) {
-        this.repository = userRepository
-    };
+export class CreateUser {
+  constructor(userRepository) {
+    this.repository = userRepository;
+  }
 
-    async execute(user) {
-        const newUser = new UserEntity(user);
-        newUser.validate();
-        return await this.repository.create(newUser.getUser());
-    };
-
-};
+  async execute(user) {
+    const newUser = new UserEntity(user);
+    newUser.validate();
+    return await this.repository.create(newUser.getUser());
+  }
+}
