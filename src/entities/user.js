@@ -1,5 +1,5 @@
 import { randomUUID } from "node: crypto";
-import { CharacterEntity } from "./character";
+import { CharacterEntity } from "../entities/character.js";
 
 export class UserEntity {
   constructor(user) {
