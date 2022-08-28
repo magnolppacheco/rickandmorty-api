@@ -21,5 +21,18 @@ export class UserEntity {
         const newCharacter = new CharacterEntity(character, this.id);
         this.character.push(newCharacter.getCharacter());
 
+    };
+
+    getUser(){
+        const user = {
+            id: this.id,
+            name: this.name,
+            email: this.email,
+            password: this.password,
+            image: this.image,
+            character: this.character,
+        };
+
+        return user;
     }
 };
