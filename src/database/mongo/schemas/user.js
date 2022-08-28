@@ -8,4 +8,4 @@ const userSchema = new Schema({
   image: { type: String, required: true },
 });
 
-export const user = model("User", userSchema);
+export const userDb = model("User", userSchema);
