@@ -5,6 +5,8 @@ import { MongoDbConnection } from "./src/database/mongo/connection/connect.js";
 import { makeUserFactory } from "./src/factories/user.js";
 import { makeCharacterFactory } from "./src/factories/character.js";
 import { makeAuthFactory } from "./src/factories/auth.js";
+import  swaggerUi  from "swagger-ui-express";
+import swaggerDocument from "./src/docs/swagger.json" assert{ type: "json"};
 
 const ConnectDb = new MongoDbConnection();
 await ConnectDb.ConnectDb();
@@ -17,11 +19,16 @@ const character = makeCharacterFactory(router);
 const auth = makeAuthFactory(router);
 
 
+
 app.use(express.json());
 app.use(cors());
 app.use("/characters", character.route());
 app.use("/users", user.route());
 app.use("/auth", auth.route());
+
+
+app.use("/docs", swaggerUi.serve);
+app.get("/docs", swaggerUi.setup(swaggerDocument)); 
 
 app.listen(3190, () => {
   console.log("Server listening on: http://localhost:3190");
