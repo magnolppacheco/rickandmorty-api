@@ -27,7 +27,7 @@ const updateUserUseCase = new UpdateUserUseCase(repository, findByIdUseCase);
 
 const userUpdated = await updateUserUseCase.execute(
   {
-    name: "Leonardo Fleck",
+    name: "Magno Pacheco",
   },
   "ab9a2477-d3dc-4723-b588-fc72c59e08dc"
 );
