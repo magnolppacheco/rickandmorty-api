@@ -1,6 +1,6 @@
 import { characterDb } from "../mongo/schemas/character.js";
 
-export class UserRepositoryMongoDb {
+export class CharacterRepositoryMongoDb {
   async create(character) {
     return await characterDb.create(character);
   }

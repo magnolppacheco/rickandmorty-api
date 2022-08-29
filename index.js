@@ -1,34 +1,45 @@
+import { CharacterRepositoryMongoDb } from "./src/database/repository/characterRepository.js";
 import { UserRepositoryMongoDb } from "./src/database/repository/userRepository.js";
-import { CreateUserUseCase } from "./src/services/usecases/user/createUser.js";
 import { MongoDbConnection } from "./src/database/mongo/connection/connect.js";
+import { CreateUserUseCase } from "./src/services/usecases/user/createUser.js";
+import { FindAllUsersUseCase } from "./src/services/usecases/user/findAllUsers.js";
 import { FindUserByIdUseCase } from "./src/services/usecases/user/findUserByID.js";
 import { UpdateUserUseCase } from "./src/services/usecases/user/updateUser.js";
+import { DeleteUserUseCase } from "./src/services/usecases/user/deleteUser.js";
+import { Services } from "./src/services/service.js";
+import { Controller } from "./src/controllers/controller.js";
 
-const database = new MongoDbConnection();
+const ConnectDb = new MongoDbConnection();
+await ConnectDb.ConnectDb();
 
-await database.ConnectDb().catch((err) => {
-  console.log(err);
-});
+const userRepository = new UserRepositoryMongoDb();
+const characterRepository = new CharacterRepositoryMongoDb();
 
-const repository = new UserRepositoryMongoDb();
-// const createUserUseCase = new CreateUserUseCase(repository);
-
-// const newUser = await createUserUseCase.execute({
-//   name: "magno",
-//   email: "magno@gmail.com",
-//   password: "password",
-//   image: "http://image.com",
-// });
-
-// console.log(newUser);
-
-const findByIdUseCase = new FindUserByIdUseCase(repository);
-const updateUserUseCase = new UpdateUserUseCase(repository, findByIdUseCase);
-
-const userUpdated = await updateUserUseCase.execute(
-  {
-    name: "Magno Pacheco",
-  },
-  "ab9a2477-d3dc-4723-b588-fc72c59e08dc"
+const createUserUseCase = new CreateUserUseCase(userRepository);
+const findAllUsersUseCase = new FindAllUsersUseCase(userRepository);
+const findUserByIdUseCase = new FindUserByIdUseCase(userRepository);
+const updateUserUseCase = new UpdateUserUseCase(
+  userRepository,
+  findUserByIdUseCase
 );
-console.log(userUpdated);
+const deleteUserUseCase = new DeleteUserUseCase(userRepository);
+
+const userService = new Services(
+  createUserUseCase,
+  findAllUsersUseCase,
+  findUserByIdUseCase,
+  updateUserUseCase,
+  deleteUserUseCase
+);
+
+const userController = new Controller(userService);
+
+const response = await userController.create({
+  body: {
+    name: "Magno Pacheco",
+    email: "um.email.da.hora@gmail.com",
+    password: "uma.senha.da.hora",
+    image: "http://fotobolada.com.br",
+  },
+});
+console.log(response);
