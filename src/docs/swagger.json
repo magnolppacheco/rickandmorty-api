@@ -1,17 +1,17 @@
 {
     "openapi": "3.0.n",
     "info": {
-      "title": "rick-and-morty-backend",
+      "title": "RICKANDMORTY-API",
       "description": "Rick and Morty Backend - Complete CRUD",
       "termsOfService": "",
       "contact": {
-        "email": "douglasvolcato@gmail.com.br"
+        "email": "magno_pacheco@gmail.com.br"
       },
       "version": "1.0.0"
     },
     "servers": [
       {
-        "url": "http://localhost:3001",
+        "url": "http://localhost:3190",
         "description": "Test and development API"
       },
       {
