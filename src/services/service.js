@@ -30,6 +30,6 @@ export class Services {
   }
 
   async delete(id) {
-    return await this.deleteUseCase.execute(id);
+    return await this.deleteByIdUseCase.execute(id);
   }
 }

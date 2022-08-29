@@ -10,7 +10,7 @@ export class UserRepositoryMongoDb {
   }
 
   async findById(id) {
-    return await userDb.findById(id);
+    return await userDb.findOne({ id: id });
   }
 
   async updateUser(user) {
@@ -18,6 +18,6 @@ export class UserRepositoryMongoDb {
   }
 
   async deleteUser(id) {
-    return await userDb.findOneAndDelete(id);
+    return await userDb.findOneAndDelete({ id: id });
   }
 }
