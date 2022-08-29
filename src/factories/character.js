@@ -26,7 +26,7 @@ export function makeCharacterFactory(router) {
   );
   const updateCharacterUseCase = new UpdateCharacterUseCase(
     characterRepository,
-    findAllCharactersUseCase
+    findCharacterByIdUseCase
   );
   const deleteCharacterUseCase = new DeleteCharacterUseCase(
     characterRepository

@@ -23,7 +23,7 @@ export class CharacterRepositoryMongoDb {
     });
   }
 
-  async deleteUser(id) {
-    return await userDb.findOneAndDelete(id);
+  async delete(id) {
+    return await characterDb.findOneAndDelete(id);
   }
 }

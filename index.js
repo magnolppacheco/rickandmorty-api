@@ -10,14 +10,14 @@ await ConnectDb.ConnectDb();
 
 const app = express();
 const router = Router();
-app.use(express.json());
-app.use(cors());
 
 const user = makeUserFactory(router);
 const character = makeCharacterFactory(router);
 
+app.use(express.json());
+app.use(cors());
 app.use("/users", user.route());
-app.use("characters", character.route());
+app.use("/characters", character.route());
 
 app.listen(3000, () => {
   console.log("Server listening on: http://localhost:3000");
