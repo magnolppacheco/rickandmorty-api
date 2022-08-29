@@ -9,6 +9,7 @@ export class AuthController {
     try {
       const { email, password } = req.body;
       const userHash = await this.findUserByEmailUseCase.execute(email);
+      console.log(userHash.password);
 
       const passwordValid = this.bcryptHelper.comparePassword(
         password,

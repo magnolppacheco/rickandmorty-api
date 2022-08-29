@@ -20,4 +20,8 @@ export class UserRepositoryMongoDb {
   async deleteUser(id) {
     return await userDb.findOneAndDelete({ id: id });
   }
+
+  async findUserByEmail(email) {
+    return await userDb.findOne({ email: email });
+  }
 }
