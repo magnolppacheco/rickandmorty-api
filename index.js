@@ -1,45 +1,24 @@
-import { CharacterRepositoryMongoDb } from "./src/database/repository/characterRepository.js";
-import { UserRepositoryMongoDb } from "./src/database/repository/userRepository.js";
+import express, { Router } from "express";
+import cors from "cors";
+
 import { MongoDbConnection } from "./src/database/mongo/connection/connect.js";
-import { CreateUserUseCase } from "./src/services/usecases/user/createUser.js";
-import { FindAllUsersUseCase } from "./src/services/usecases/user/findAllUsers.js";
-import { FindUserByIdUseCase } from "./src/services/usecases/user/findUserByID.js";
-import { UpdateUserUseCase } from "./src/services/usecases/user/updateUser.js";
-import { DeleteUserUseCase } from "./src/services/usecases/user/deleteUser.js";
-import { Services } from "./src/services/service.js";
-import { Controller } from "./src/controllers/controller.js";
+import { makeUserFactory } from "./src/factories/user.js";
+import { makeCharacterFactory } from "./src/factories/character.js";
 
 const ConnectDb = new MongoDbConnection();
 await ConnectDb.ConnectDb();
 
-const userRepository = new UserRepositoryMongoDb();
-const characterRepository = new CharacterRepositoryMongoDb();
+const app = express();
+const router = Router();
+app.use(express.json());
+app.use(cors());
 
-const createUserUseCase = new CreateUserUseCase(userRepository);
-const findAllUsersUseCase = new FindAllUsersUseCase(userRepository);
-const findUserByIdUseCase = new FindUserByIdUseCase(userRepository);
-const updateUserUseCase = new UpdateUserUseCase(
-  userRepository,
-  findUserByIdUseCase
-);
-const deleteUserUseCase = new DeleteUserUseCase(userRepository);
+const user = makeUserFactory(router);
+const character = makeCharacterFactory(router);
 
-const userService = new Services(
-  createUserUseCase,
-  findAllUsersUseCase,
-  findUserByIdUseCase,
-  updateUserUseCase,
-  deleteUserUseCase
-);
+app.use("/users", user.route());
+app.use("characters", character.route());
 
-const userController = new Controller(userService);
-
-const response = await userController.create({
-  body: {
-    name: "Magno Pacheco",
-    email: "um.email.da.hora@gmail.com",
-    password: "uma.senha.da.hora",
-    image: "http://fotobolada.com.br",
-  },
+app.listen(3000, () => {
+  console.log("Server listening on: http://localhost:3000");
 });
-console.log(response);
