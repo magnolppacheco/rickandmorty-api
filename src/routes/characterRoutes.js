@@ -5,7 +5,9 @@ export class CharacterRoutes {
   }
 
   route() {
-    this.router.get("/all-characters", (req, res) => this.characterController.find(req, res));
+    this.router.get("/all-characters", (req, res) =>
+      this.characterController.find(req, res)
+    );
     this.router.get("/find-character/:id", (req, res) =>
       this.characterController.findById(req, res)
     );

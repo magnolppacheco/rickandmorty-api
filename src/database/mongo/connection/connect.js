@@ -2,11 +2,12 @@ import { config } from "dotenv";
 import { mongoose } from "mongoose";
 
 if (process.env.NODE_ENV !== "production") {
-    config();
+  config();
 }
 
 export class MongoDbConnection {
-    async ConnectDb(){
-        if(await mongoose.connect(process.env.DATABASE_URL)) console.log("ConnectDb");
-    }
+  async ConnectDb() {
+    if (await mongoose.connect(process.env.DATABASE_URL))
+      console.log("ConnectDb");
+  }
 }
