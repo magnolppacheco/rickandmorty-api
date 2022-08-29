@@ -30,6 +30,7 @@ app.use("/auth", auth.route());
 app.use("/docs", swaggerUi.serve);
 app.get("/docs", swaggerUi.setup(swaggerDocument)); 
 
-app.listen(3190, () => {
-  console.log("Server listening on: http://localhost:3190");
+const port = process.env.PORT || 3190;
+app.listen(port, () => {
+  console.log(`Server listening on: http://localhost:${port}`);
 });
