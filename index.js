@@ -1,14 +1,34 @@
 import { UserRepositoryMongoDb } from "./src/database/repository/userRepository.js";
-import { CreateUserUseCase } from "./src/services/usecases/createUser.js";
+import { CreateUserUseCase } from "./src/services/usecases/user/createUser.js";
+import { MongoDbConnection } from "./src/database/mongo/connection/connect.js";
+import { FindUserByIdUseCase } from "./src/services/usecases/user/findUserByID.js";
+import { UpdateUserUseCase } from "./src/services/usecases/user/updateUser.js";
 
-const repository = new UserRepositoryMongoDb();
-const createUserUseCase = new CreateUserUseCase(repository);
+const database = new MongoDbConnection();
 
-const newUser = await createUserUseCase.execute({
-  name: "magno",
-  email: "magno@gmail.com",
-  password: "password",
-  image: "http://image.com",
+await database.ConnectDb().catch((err) => {
+  console.log(err);
 });
 
-console.log(newUser);
+const repository = new UserRepositoryMongoDb();
+// const createUserUseCase = new CreateUserUseCase(repository);
+
+// const newUser = await createUserUseCase.execute({
+//   name: "magno",
+//   email: "magno@gmail.com",
+//   password: "password",
+//   image: "http://image.com",
+// });
+
+// console.log(newUser);
+
+const findByIdUseCase = new FindUserByIdUseCase(repository);
+const updateUserUseCase = new UpdateUserUseCase(repository, findByIdUseCase);
+
+const userUpdated = await updateUserUseCase.execute(
+  {
+    name: "Leonardo Fleck",
+  },
+  "ab9a2477-d3dc-4723-b588-fc72c59e08dc"
+);
+console.log(userUpdated);

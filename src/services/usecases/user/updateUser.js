@@ -1,4 +1,4 @@
-import { UserEntity } from "../../entities/user.js";
+import { UserEntity } from "../../../entities/user.js";
 
 export class UpdateUserUseCase {
   constructor(userRepository, findUserById) {
@@ -7,12 +7,12 @@ export class UpdateUserUseCase {
   }
 
   async execute(userUpdated, userId) {
-    const userToUpdate = await this.findUserById(userId);
+    const userToUpdate = await this.findUserById.execute(userId);
     if (!userToUpdate) {
       throw new Error("Not found a user with UserID:" + userId);
     }
 
-    const userModified = { ...userToUpdate, userUpdated };
+    const userModified = Object.assign(userToUpdate, userUpdated);
     const userValidated = new UserEntity(userModified);
     userValidated.validate();
     return await this.repository.updateUser(userValidated.getUser());
