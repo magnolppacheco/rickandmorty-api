@@ -14,7 +14,7 @@ export class CharacterRoutes {
       this.characterController.findById(req, res)
     );
     this.router.get("/search-character", (req, res) =>
-      this.characterController.findCharacterByName(req, res)
+      this.characterController.findByName(req, res)
     );
     this.router.post("/create-character", authentication, (req, res) =>
       this.characterController.create(req, res)

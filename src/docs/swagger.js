@@ -35,7 +35,7 @@ export const swaggerDocument = {
                 "Users": {
                   "value": {
                     "name": "Example Name",
-                    "email": "examplename@gmail.com",
+                    "email": "exampleemail@example.com",
                     "password": "examplepassword",
                     "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9SH04NvssGLNcQUCAxeX21GPKOGZYBn-xPg&usqp=CAU"
                   }
@@ -152,6 +152,25 @@ export const swaggerDocument = {
             "required": true
           }
         ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User"
+              },
+              "examples": {
+                "User": {
+                  "value": {
+                    "name": "Example 2",
+                    "email": "example2@example.com",
+                    "password": "passwordexample2",
+                    "image": "https://imageexample.com"
+                  }
+                }
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
             "description": "OK",
@@ -229,7 +248,7 @@ export const swaggerDocument = {
               "examples": {
                 "User": {
                   "value": {
-                    "email": "exampleemail@gmail.com.br",
+                    "email": "exampleemail@example.com",
                     "password": "examplepassword"
                   }
                 }
@@ -393,7 +412,7 @@ export const swaggerDocument = {
       }
     },
     "/characters/update-character/{id}": {
-      "put": {
+      "patch": {
         "summary": "Edit character by id",
         "description": "Route responsable for editing a character by id",
         "tags": ["Character"],

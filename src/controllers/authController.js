@@ -20,6 +20,7 @@ export class AuthController {
       }
 
       const data = {
+        id: userHash.id,
         email: userHash.email,
         image: userHash.image,
       };

@@ -5,6 +5,7 @@ export class JwtHelper {
     const token = jwt.sign({ data }, process.env.SECRET_PASSWORD, {
       expiresIn: "24h",
     });
+    console.log(data);
     return token;
   }
 

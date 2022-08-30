@@ -13,6 +13,6 @@ export async function authentication(req, res, next) {
     next();
   } catch (err) {
     console.log(err);
-    res.status(401).send('Invalid token! User non authorized!');
+    res.status(401).send("Invalid token! User non authorized!");
   }
 }
