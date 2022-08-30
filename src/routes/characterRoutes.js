@@ -1,3 +1,5 @@
+import { authentication } from "../middleware/auth.js"
+
 export class CharacterRoutes {
   constructor(controller, router) {
     this.characterController = controller;
@@ -14,13 +16,13 @@ export class CharacterRoutes {
     this.router.get("/search-character", (req, res) =>
       this.characterController.findCharacterByName(req, res)
     );
-    this.router.post("/create-character", (req, res) =>
+    this.router.post("/create-character", authentication, (req, res) =>
       this.characterController.create(req, res)
     );
-    this.router.patch("/update-character/:id", (req, res) =>
+    this.router.patch("/update-character/:id", authentication, (req, res) =>
       this.characterController.update(req, res)
     );
-    this.router.delete("/delete-character/:id", (req, res) =>
+    this.router.delete("/delete-character/:id", authentication,(req, res) =>
       this.characterController.delete(req, res)
     );
     return this.router;

@@ -1,4 +1,4 @@
-{
+export const swaggerDocument = { 
   "openapi": "3.0.n",
   "info": {
     "title": "RICKANDMORTY-API",
@@ -34,11 +34,10 @@
               "examples": {
                 "Users": {
                   "value": {
-                    "name": "Douglas",
-                    "username": "DouglasVolcato",
-                    "email": "douglasvolcatoe@gmail.com",
-                    "password": "password15",
-                    "photo": "https://avatars.githubusercontent.com/u/106124397?v=4"
+                    "name": "Example Name",
+                    "email": "examplename@gmail.com",
+                    "password": "examplepassword",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9SH04NvssGLNcQUCAxeX21GPKOGZYBn-xPg&usqp=CAU"
                   }
                 }
               }
@@ -95,6 +94,126 @@
           }
         }
       }
+    },"/users/{id}": {
+      "get": {
+        "summary": "Show the users by id",
+        "description": "Route responsable for showing the users by id",
+        "tags": ["User"],
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "user id for search",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },"/users/update/{id}": {
+      "patch": {
+        "summary": "Update the user",
+        "description": "Route responsable for update the user by id",
+        "tags": ["User"],
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "user id for search",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
+    },"/users/delete/{id}": {
+      "delete": {
+        "summary": "Delete the user",
+        "description": "Route responsable for showing the users by id",
+        "tags": ["User"],
+        "security": [
+          {
+            "token": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "user id for search",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/User"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        }
+      }
     },
     "/auth/login": {
       "post": {
@@ -110,8 +229,8 @@
               "examples": {
                 "User": {
                   "value": {
-                    "email": "douglasvolcato@gmail.com.br",
-                    "password": "12345"
+                    "email": "exampleemail@gmail.com.br",
+                    "password": "examplepassword"
                   }
                 }
               }
@@ -140,7 +259,7 @@
         }
       }
     },
-    "/characters/create": {
+    "/characters/create-character": {
       "post": {
         "summary": "Creates a new character",
         "description": "Route responsable for creating a new character",
@@ -159,9 +278,9 @@
               "examples": {
                 "Tweet": {
                   "value": {
-                    "user": "DouglasVolcato",
-                    "name": "Rick Sanchez",
-                    "imageUrl": "https://rickandmortyapi.com/api/character/avatar/1.jpeg"
+                    "name": "Character Example",
+                    "image": "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
+                    "userId": "123example"
                   }
                 }
               }
@@ -189,7 +308,7 @@
         }
       }
     },
-    "/characters": {
+    "/characters/all-characters": {
       "get": {
         "summary": "Show the characters",
         "description": "Route responsable for showing the characters",
@@ -234,7 +353,7 @@
         }
       }
     },
-    "/characters/find/{id}": {
+    "/characters/find-character/{id}": {
       "get": {
         "summary": "Search a character by id",
         "description": "Route responsable for searching a character by id",
@@ -273,7 +392,7 @@
         }
       }
     },
-    "/characters/update/{id}": {
+    "/characters/update-character/{id}": {
       "put": {
         "summary": "Edit character by id",
         "description": "Route responsable for editing a character by id",
@@ -326,7 +445,7 @@
         }
       }
     },
-    "/characters/delete/{id}": {
+    "/characters/delete-character/{id}": {
       "delete": {
         "summary": "Delete a character by id",
         "description": "Route responsable for deleting a character by id",
@@ -365,7 +484,7 @@
         }
       }
     },
-    "/characters/search": {
+    "/characters/search-character": {
       "get": {
         "summary": "Search character by name",
         "description": "Route responsable for searching a character by name",
@@ -413,16 +532,13 @@
           "name": {
             "type": "string"
           },
-          "username": {
-            "type": "string"
-          },
           "email": {
             "type": "string"
           },
           "password": {
             "type": "string"
           },
-          "photo": {
+          "image": {
             "type": "string"
           }
         }
@@ -430,13 +546,13 @@
       "Character": {
         "type": "object",
         "properties": {
-          "user": {
-            "type": "string"
-          },
           "name": {
             "type": "string"
           },
-          "imageUrl": {
+          "image": {
+            "type": "string"
+          },
+          "userId": {
             "type": "string"
           }
         }

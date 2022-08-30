@@ -1,3 +1,5 @@
+import { authentication } from "../middleware/auth.js";
+
 export class UserRoutes {
   constructor(controller, router) {
     this.userController = controller;
@@ -5,17 +7,17 @@ export class UserRoutes {
   }
 
   route() {
-    this.router.get("/", (req, res) => this.userController.find(req, res));
-    this.router.get("/:id", (req, res) =>
+    this.router.get("/", authentication, (req, res) => this.userController.find(req, res));
+    this.router.get("/:id", authentication, (req, res) =>
       this.userController.findById(req, res)
     );
     this.router.post("/create", (req, res) =>
       this.userController.create(req, res)
     );
-    this.router.patch("/update/:id", (req, res) =>
+    this.router.patch("/update/:id", authentication, (req, res) =>
       this.userController.update(req, res)
     );
-    this.router.delete("/delete/:id", (req, res) =>
+    this.router.delete("/delete/:id", authentication, (req, res) =>
       this.userController.delete(req, res)
     );
     return this.router;

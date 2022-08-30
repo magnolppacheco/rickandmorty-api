@@ -6,7 +6,7 @@ import { makeUserFactory } from "./src/factories/user.js";
 import { makeCharacterFactory } from "./src/factories/character.js";
 import { makeAuthFactory } from "./src/factories/auth.js";
 import swaggerUi from "swagger-ui-express";
-import swaggerDocument from "./src/docs/swagger.json" assert { type: "json" };
+import { swaggerDocument } from "./src/docs/swagger.js";
 
 const ConnectDb = new MongoDbConnection();
 await ConnectDb.ConnectDb();
