@@ -23,10 +23,10 @@ Documentation: https://rickandmorty-api-mlpp.herokuapp.com/docs/
 - [DELETE] Delete character by id.
 
 # Requirements:
-- Persistência de dados no MongoDB Atlas;
-- Formatação do código utilizando o Prettier;
-- Documentação Swagger: (1 ponto);
-- Status Code corretos em todos os endpoints;
-- Deploy no Heroku (1 ponto);
-- Autenticacao JWT (1 ponto).
+
+- Data persistence with MongoDb Atlas;
+- Code format with Prettier;
+- Swagger's Documentation.
+- Heroku Deployments;
+- JWT Authentication.
 
