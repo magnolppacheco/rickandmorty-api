@@ -1,4 +1,4 @@
-import { authentication } from "../middleware/auth.js"
+import { authentication } from "../middleware/auth.js";
 
 export class CharacterRoutes {
   constructor(controller, router) {
@@ -22,7 +22,7 @@ export class CharacterRoutes {
     this.router.patch("/update-character/:id", authentication, (req, res) =>
       this.characterController.update(req, res)
     );
-    this.router.delete("/delete-character/:id", authentication,(req, res) =>
+    this.router.delete("/delete-character/:id", authentication, (req, res) =>
       this.characterController.delete(req, res)
     );
     return this.router;

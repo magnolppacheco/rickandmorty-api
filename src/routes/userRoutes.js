@@ -7,7 +7,9 @@ export class UserRoutes {
   }
 
   route() {
-    this.router.get("/", authentication, (req, res) => this.userController.find(req, res));
+    this.router.get("/", authentication, (req, res) =>
+      this.userController.find(req, res)
+    );
     this.router.get("/:id", authentication, (req, res) =>
       this.userController.findById(req, res)
     );
